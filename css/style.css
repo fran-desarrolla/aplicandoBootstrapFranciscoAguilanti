@@ -1,5 +1,3 @@
-/* reset y propiedades generales */
-
 * {
     margin: 0;
     padding: 0;
@@ -8,8 +6,8 @@
 }
 
 body{
-background: rgb(255,255,255);
-background: radial-gradient(circle, rgba(255,255,255,1) 10%, rgba(238,232,232,1) 100%);
+    background: rgb(255,255,255);
+    background: radial-gradient(circle, rgba(255,255,255,1) 10%, rgba(238,232,232,1) 100%);
 }
 
 a {
@@ -17,56 +15,59 @@ a {
     
 }
 
-
+/* Al <main> le di display contents porque fue el único modo que encontré para que no me rompiera el flujo*/
 
 main{
-    height:100vh;
-    
+    display:contents;
 }
 
-.titulo__pagina{
-  text-align:left;
-  padding-top:4rem;
-  
+/* Grid y Propiedades del HEADER (incluye el navbar de bootstrap)*/
+
+.header { grid-area: header; 
 }
-
-
-/*propiedades del header*/
 
 .navbar{
-    background-color: rgb(8, 8, 8);
+  background-color: rgb(8, 8, 8);
 }
 
 .navbar-collapse{
-    flex-grow: 0;
-    margin-right:80px;
+  flex-grow: 0;
+  margin-right:80px;
 }
 
 .nav-link{
-    color:whitesmoke
+  color:whitesmoke
 }
 
 .nav-link:hover{
-   font-weight: bold;
-   color:white;
-   border-bottom:2px solid whitesmoke;
+ font-weight: bold;
+ color:white;
+ border-bottom:2px solid whitesmoke;
 }
 
 
 .navbar-toggler-icon{
-    background-image:url(../img/icons/menu.jpg) ;
+  background-image:url(../img/icons/menu.jpg) ;
 }
 
-.main__home {
-    background-image: url(../img/fondoHome.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: top;
-    background-color: rgb(238, 232, 232);
-    display: flex;
-}
 
-.texto {
+
+/* Grid y propiedades del HOME */
+
+.grid__home {  display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 100vh 1fr;
+    grid-auto-columns: 1fr;
+    grid-auto-rows: 1fr;
+    
+    grid-auto-flow: column;
+    grid-template-areas:
+      "header"
+      "main__home"
+      "footer";
+  }
+
+  .texto {
     position: relative;
     font-size: 1.3rem;
     text-align: right;
@@ -78,72 +79,82 @@ main{
 .texto p{
     margin-bottom:0px;
 }
+  
+   .main__home { grid-area: main__home; 
+    background-image: url(../img/fondoHome.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top;
+    background-color: rgb(238, 232, 232);
+    display: flex;
 
-.h1__home{
-    color:transparent;
-    font-size: 1px;
+}
+  
+
+ 
+
+
+/*Grid y Porpiedades de NOSOTRAS*/
+
+
+.grid__nosotras {  display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto 100vh auto;
+    gap: 0px 0px;
+    grid-auto-flow: column;
+    grid-template-areas:
+      "header header header"
+      "titulo titulo titulo"
+      "nosotras__texto nosotras__texto nosotras__imagen"
+      "footer footer footer";
+      background: rgb(255,255,255);
+    background: radial-gradient(circle, rgba(255,255,255,1) 20%, rgba(213,211,211,1) 100%);
+  }
+
+  
+  .nosotras__texto { grid-area: nosotras__texto; 
+     display:flex
+
 }
 
-
-/*propiedades del grid nosotras*/
-
-.grid__nosotras {
-    display: grid;
-    height: auto;
-
-
-    grid-template-areas: "header"
-                        "titulo"
-                        "main__nosotras";
-    grid-template-rows: 0rem 0rem 100vh ; 
-     grid-template-columns: 100% ;
-      
+.nosotras__texto-texto{
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+    padding-left: 15%;
+    padding-right: 5%;
+    font-size: 1.2rem;
+    text-align: right;
+    color:rgb(43, 5, 46);
+    font-weight: 600;
     
 }
 
-/*propiedades nosotras*/
-.header {
-    grid-area: header;
-
-}
-
-.nosotras__texto {
-    width:50%;
-    text-align: justify;
-    font-size: 1.0rem;
-    line-height: 2.2rem;
-    padding:1rem;
-        
- }
-
- .nosotras__texto p{
-    margin-bottom:2rem;
-    text-align: right;
- }
-
-.nosotras__imagen {
-    width:50%;
-    padding:1rem;
-    text-align:center;
-       
-}
-
-.titulo{
-    grid-area:titulo;
-}
-
-.main__nosotras{
-    grid-area:main__nosotras;
-    width:70%;
-    height:fit-content;
-    display:flex;
-    flex-wrap:wrap;
-    justify-content: center;
-    align-items: center;
-    margin:auto;
+  .nosotras__imagen { grid-area: nosotras__imagen; 
+   display:flex;
+   align-items: center;
    
 }
 
+    .nosotras__imagen img{
+        height:70vh;
+        
+    }
+
+  
+.titulo { grid-area: titulo;
+        height: fit-content;
+        margin-top: 70px;
+        padding-left:50px;
+        padding-top:10px;
+        }
+
+.titulo h1{
+    font-size: 1.8rem;
+    font-weight: bold;
+    color:rgb(43, 5, 46);
+    
+}
 /*propiedades del grid tienda*/
 .grid__tienda {
     display: grid;
@@ -252,13 +263,6 @@ header {
     grid-area: header;
 }
 
-.titulo {
-    grid-area: titulo;
-    margin-top: 15px;
-    margin-left: 35px;
-    
-}
-
 /*propiedades del grid contacto*/
 
 .grid__contacto {
@@ -358,17 +362,17 @@ header {
     color:whitesmoke;
 }
 
-/*propiedades del footer*/
+ /*propiedades del footer*/
 
-footer {
-    background-color: rgb(8, 8, 8);
+ footer {
+    grid-area: footer; 
+    background-color: rgb(8,8,8);
     width: 100%;
     color: whitesmoke;
     height: auto;
     display: flex;
     justify-content: space-evenly;
-    
-   
+    grid-area: footer;
     
 }
 
@@ -388,27 +392,16 @@ footer div a {
     color: whitesmoke;
 }
 
-footer h2 {
+footer h3 {
     margin-bottom: 10px;
     font-size: 1.1rem;
 }
 
-footer h3,h4{
-    font-size: 1rem;
-}
-
 .footer__medioPago {
-    width: 40%;
-}
-
-footer div h3 a img{
-    margin-right:10px
+    width: 70%;
 }
 
 
-footer div a h3 :hover{
-    display:none;
-}
 
 
 /*Inicio media query 800*******************************************************************************/
@@ -423,12 +416,47 @@ footer div a h3 :hover{
 
     .texto {
         position: relative;
-        font-size: 1rem;
+        font-size: 1.3rem;
         text-align: right;
         font-style: oblique;
-        margin-top: 5rem;
+       
         margin-left: 4rem;
+    
     }
+
+   
+    .grid__nosotras {  display: grid; 
+        grid-auto-columns: 1fr; 
+        grid-auto-rows: 1fr; 
+        grid-template-columns: 1fr; 
+        grid-template-rows: auto auto auto auto; 
+       grid-template-areas: 
+          "header"
+          "titulo"
+          "nosotras__imagen"
+          "nosotras__texto"
+           "footer"; 
+        justify-content: space-evenly; 
+        
+    }
+
+    .nosotras__imagen{
+        display:flex;
+        justify-content: center;
+    }
+
+    .nosotras__imagen img{
+        height: 50vh;
+    }
+
+    
+    .nosotras__texto-texto{
+        padding-left: 5%;
+        padding-right: 5%;
+        text-align: center;
+       
+    }
+
 
 
 
@@ -504,19 +532,46 @@ footer div a h3 :hover{
         height: 9.5rem;
         padding: 1rem;
         margin-left: 0px;
-        margin-top: 21rem;
-
+        margin-top: 70vh;
+    }
+    .texto p{
+        font-size: 1.3rem;
     }
 
-   .main__nosotras{
-       flex-direction:column-reverse;
-   }
+    .grid__nosotras {  display: grid; 
+        grid-auto-columns: 1fr; 
+        grid-auto-rows: 1fr; 
+        grid-template-columns: 1fr; 
+        grid-template-rows: auto auto auto auto; 
+       grid-template-areas: 
+          "header"
+          "titulo"
+          "nosotras__imagen"
+          "nosotras__texto"
+           "footer"; 
+        justify-content: space-evenly; 
+        
+    }
 
     .nosotras__imagen{
-        width:100%;
+        display:flex;
+        justify-content: center;
     }
-    .nosotras__texto{
-        width:100%;
+
+    .nosotras__imagen img{
+        height: 50vh;
+    }
+
+    
+    .nosotras__texto-texto{
+        padding-left: 5%;
+        padding-right: 5%;
+        text-align: center;
+       
+    }
+
+    .nosotras__texto-texto p{
+        font-size: 1.2rem;
     }
 
     .mediosPago {
